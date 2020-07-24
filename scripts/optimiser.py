@@ -3,7 +3,7 @@ import numpy as np
 N_EVALUATIONS = 32
 SEED = 122222
 
-class Optimizer(object):
+class Optimiser(object):
   def __init__(self, x0, scale=1e-2, seed=1122):
     self.x0 = x0
     self.rng = np.random.RandomState(seed=seed)
@@ -56,7 +56,7 @@ if __name__ == '__main__':
     x0 = np.zeros(sase.ndim())
 
     xs, fs = eval_optimization(
-      Optimizer,
+      Optimiser,
       bounds=bounds,
       f=objective,
       x0=x0,

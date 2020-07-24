@@ -5,11 +5,11 @@ __all__ = [
 ]
 
 def eval_optimization(
-  optimizer_class, f, x0, bounds,
+  optimiser_class, f, x0, bounds,
   moving_cost=1, measuring_cost=1, budget=128,
   progress=None
 ):
-  optimizer = optimizer_class(x0)
+  optimiser = optimiser_class(x0)
 
   current_x = np.zeros_like(x0)
 
@@ -23,7 +23,7 @@ def eval_optimization(
   progress = progress(total=budget) if progress is not None else None
 
   for _ in range(max_iterations):
-    x = optimizer.ask()
+    x = optimiser.ask()
     x = np.array(x, dtype=np.float64)
     assert x.shape == x0.shape
 
@@ -46,7 +46,7 @@ def eval_optimization(
     value = f(x)
     current_x = x
 
-    optimizer.tell(x, value)
+    optimiser.tell(x, value)
 
     history_x.append(np.copy(x))
     history_f.append(np.copy(value))
